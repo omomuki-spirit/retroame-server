@@ -1,0 +1,10 @@
+services:
+  app:
+    build:
+      context: .
+    command: 'yarn run dev'
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - "127.0.0.1:3001:3001"

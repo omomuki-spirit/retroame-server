@@ -1,0 +1,27 @@
+{
+  "name": "retroame-server",
+  "version": "0.0.1",
+  "main": "index.js",
+  "devDependencies": {
+    "@eslint/js": "^9.6.0",
+    "@types/eslint__js": "^8.42.3",
+    "@types/node": "^20.14.10",
+    "@types/ws": "^8.5.10",
+    "eslint": "^9.6.0",
+    "nodemon": "^3.1.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3",
+    "typescript-eslint": "^7.16.0"
+  },
+  "scripts": {
+    "build": "tsc -p .",
+    "dev": "nodemon",
+    "server": "node /app/dist/server.js"
+  },
+  "author": "omomuki-spirit",
+  "license": "BUSL-1.1",
+  "description": "",
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}

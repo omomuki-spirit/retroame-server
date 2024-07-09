@@ -1,0 +1,12 @@
+#!/bin/bash
+# Change file permissions to current user
+#
+# @example
+# ./bin/dev/chown;
+#
+set -e;
+
+CUID=$(id -u $(whoami));
+CGID=$(id -g $(whoami));
+
+$(dirname $0)/run chown ${CUID}:${CGID} -R /app;

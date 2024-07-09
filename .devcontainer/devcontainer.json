@@ -1,0 +1,31 @@
+{
+  "name": "retroame-server--workspace",
+  "dockerComposeFile": "docker-compose.workspace.yml",
+  "service": "workspace",
+  "workspaceFolder": "/app",
+  "onCreateCommand": "/app/.devcontainer/setup.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint"
+      ],
+      "settings": {
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true,
+        "editor.detectIndentation": false,
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit"
+        },
+        "editor.quickSuggestions": {
+          "strings": true
+        },
+        "eslint.validate": [
+          "javascript",
+          "typescript"
+        ],
+        "files.insertFinalNewline": true,
+        "files.trimTrailingWhitespace": true
+      }
+    }
+  }
+}

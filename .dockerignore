@@ -1,0 +1,5 @@
+# Package directory.
+node_modules/
+
+# Output directory.
+dist/

@@ -1,0 +1,9 @@
+services:
+  workspace:
+    build:
+      context: ..
+    tty: true
+    command: '/bin/bash'
+    volumes:
+      - ..:/app
+      - /app/node_modules

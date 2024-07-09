@@ -1,0 +1,16 @@
+Business Source License 1.1
+
+### Licensor
+omomuki-spirit
+
+### Licensed Work
+The Licensed Work is (c) 2024 omomuki-spirit.
+
+### Additional Use Grant
+You may use the Licensed Work only for non-commercial purposes.
+
+### Change Date
+6 years from the date the Licensed Work is published.
+
+### Change License
+MPL 2.0
