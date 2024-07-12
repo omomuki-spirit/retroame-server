@@ -1,0 +1,5 @@
+#!/bin/bash
+# Start development in container
+
+$(dirname $0)/run yarn run build;
+docker compose up;

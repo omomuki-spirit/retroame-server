@@ -1,5 +1,6 @@
 {
-  "watch": ["src"],
+  "watch": ["app"],
+  "ignore": ["app/tasks/**/*"],
   "ext": "ts",
-  "exec": "ts-node ./src/server.ts"
+  "exec": "ts-node ./app/app.ts | pino-pretty -c"
 }

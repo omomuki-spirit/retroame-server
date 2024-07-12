@@ -4,4 +4,4 @@
 # @example
 # ./bin/dev/run ls;
 #
-docker compose run --no-deps --rm app $@;
+docker compose run --no-deps --rm app_game_lobby $@;

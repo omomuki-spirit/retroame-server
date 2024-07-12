@@ -1,27 +1,37 @@
 {
   "name": "retroame-server",
   "version": "0.0.1",
-  "main": "index.js",
-  "devDependencies": {
-    "@eslint/js": "^9.6.0",
-    "@types/eslint__js": "^8.42.3",
-    "@types/node": "^20.14.10",
-    "@types/ws": "^8.5.10",
-    "eslint": "^9.6.0",
-    "nodemon": "^3.1.4",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.5.3",
-    "typescript-eslint": "^7.16.0"
-  },
+  "main": ".output/app/app.js",
   "scripts": {
-    "build": "tsc -p .",
+    "build": "ts-node app/tasks/build/all.ts",
     "dev": "nodemon",
-    "server": "node /app/dist/server.js"
+    "server": "node .output/app/app.js"
   },
   "author": "omomuki-spirit",
   "license": "BUSL-1.1",
   "description": "",
   "dependencies": {
+    "@fastify/static": "^7.0.4",
+    "@prisma/client": "5.16.2",
+    "bcrypt": "^5.1.1",
+    "fastify": "^4.28.1",
+    "pino": "^9.2.0",
     "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.6.0",
+    "@types/bcrypt": "^5.0.2",
+    "@types/eslint__js": "^8.42.3",
+    "@types/node": "^20.14.10",
+    "@types/ws": "^8.5.10",
+    "eslint": "^9.6.0",
+    "eslint-plugin-import": "^2.29.1",
+    "fast-glob": "^3.3.2",
+    "nodemon": "^3.1.4",
+    "pino-pretty": "^11.2.1",
+    "prisma": "^5.16.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3",
+    "typescript-eslint": "^7.16.0"
   }
 }

@@ -1,10 +1,27 @@
 services:
-  app:
+  app_game_lobby:
     build:
       context: .
     command: 'yarn run dev'
+    environment:
+      RETROAME_MODE:         'lobby'
+      RETROAME_DATABASE_URL: 'mysql://root:root_password@database:3306/retroame_db'
     volumes:
       - .:/app
       - /app/node_modules
     ports:
       - "127.0.0.1:3001:3001"
+    depends_on:
+      - database
+  database:
+    image: mariadb:11.4.2-ubi9
+    command: 'mariadbd --character-set-server=utf8mb4 --collation-server=utf8mb4_bin'
+    environment:
+      MARIADB_DATABASE:      'retroame_db'
+      MARIADB_ROOT_PASSWORD: 'root_password'
+    volumes:
+      - mariadb:/var/lib/mysql
+
+volumes:
+  mariadb:
+    driver: local
