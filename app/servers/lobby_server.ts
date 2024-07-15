@@ -1,7 +1,8 @@
 import { existsSync } from "fs";
 import staticServer from "@fastify/static";
 import createServer from "fastify";
-import type { FastifyInstance } from "fastify";
+import type { FastifyInstance, FastifyRequest } from "fastify";
+import createUser from "../interactions/users/create_user";
 import { ApplicationServer } from "./application_server";
 
 /**
@@ -25,13 +26,24 @@ export class LobbyServer extends ApplicationServer {
    * Start server.
    */
   start(): void {
-    if (!existsSync(`${this.assetsDir}/index.json`)) {
-      throw new Error("Asset is not built. Please execute `yarn run build`");
-    }
+    this.mountAssetServer();
+    this.mountApiServer();
 
-    this.server.register(staticServer, {
-      root: this.assetsDir,
-      prefix: "/assets/"
+    this.server.setErrorHandler((error, request, reply) => {
+      LOGGER.error({
+        request: {
+          method: request.method,
+          path:   request.url,
+          body:   request.body,
+          ip:     request.socket.remoteAddress,
+          port:   request.socket.remotePort
+        },
+        error: {
+          message: error.message,
+          stack:   error.stack
+        }
+      }, "Unhandled Exception.");
+      reply.status(500).send({ ok: false, error: { type: "server", code: "error", options: {} } });
     });
 
     this.server.listen({ port: this.port, host: this.host }, (err) => {
@@ -39,5 +51,52 @@ export class LobbyServer extends ApplicationServer {
 
       LOGGER.info(`Listen http://${this.host}:${this.port}`);
     });
+  }
+
+  /**
+   * Mount Asset Server
+   */
+  private mountAssetServer(): void {
+    if (!existsSync(`${this.assetsDir}/index.json`)) {
+      throw new Error("Asset is not built. Please execute `yarn run build`");
+    }
+
+    this.server.register(staticServer, {
+      root:   this.assetsDir,
+      prefix: "/assets/"
+    });
+  }
+
+  /**
+   * Mount API Server
+   */
+  private mountApiServer(): void {
+    this.server.post("/api/v1/user", async (request, reply) => {
+      const params = this.getParams(request);
+      const result = await createUser({
+        name:     params.name || "",
+        password: params.password || ""
+      });
+
+      if (result.error) {
+        reply.status(400).send({ ok: false, error: result.error });
+      } else {
+        LOGGER.info(`CreateUser id:${result.value.id} ip:${request.socket.remoteAddress} port:${request.socket.remotePort}`);
+        reply.status(200).send({ ok: true });
+      }
+    });
+  }
+
+  /**
+   * Get reuqest parameter.
+   * @param request Request.
+   * @return Reuqest parameter.
+   */
+  private getParams(request: FastifyRequest): Record<string, string | undefined> {
+    if (request.body && typeof request.body === "object") {
+      return request.body as Record<string, string | undefined>;
+    } else {
+      return {};
+    }
   }
 }
