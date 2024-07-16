@@ -4,16 +4,18 @@ services:
       context: .
     command: 'yarn run dev'
     environment:
+      RETROAME_DATABASE_URL: 'mysql://root:root_password@mariadb:3306/retroame_db'
       RETROAME_MODE:         'lobby'
-      RETROAME_DATABASE_URL: 'mysql://root:root_password@database:3306/retroame_db'
+      RETROAME_REDIS_URL:    'redis://redis:6379'
     volumes:
       - .:/app
       - /app/node_modules
     ports:
       - "127.0.0.1:3001:3001"
     depends_on:
-      - database
-  database:
+      - mariadb
+      - redis
+  mariadb:
     image: mariadb:11.4.2-ubi9
     command: 'mariadbd --character-set-server=utf8mb4 --collation-server=utf8mb4_bin'
     environment:
@@ -21,7 +23,13 @@ services:
       MARIADB_ROOT_PASSWORD: 'root_password'
     volumes:
       - mariadb:/var/lib/mysql
+  redis:
+    image: redis:7.2.5-alpine3.20
+    volumes:
+      - redis:/data
 
 volumes:
   mariadb:
+    driver: local
+  redis:
     driver: local

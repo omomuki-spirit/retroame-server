@@ -1,7 +1,7 @@
 import type { TOperationResult } from "../../types/interactions/operation_result";
 import type { IUser } from "../../types/models/user";
 import useDatabase from "../databases/use_database";
-import encryptPassword from "../password/encrypt_password";
+import encryptPassword from "../passwords/encrypt_password";
 
 export default async function createUser({ name, password }: { name: string, password: string }): TOperationResult<IUser> {
   if (name.length < 3 || 16 < name.length) {

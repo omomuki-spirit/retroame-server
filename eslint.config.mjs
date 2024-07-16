@@ -18,6 +18,7 @@ export default tseslint.config(
       "semi":                                             ["error", "always"],
       "import/no-duplicates":                             ["error"],
       "import/order":                                     ["error", { "alphabetize": { "order": "asc" }}],
+      "@typescript-eslint/consistent-type-imports":       ["error"],
       "@typescript-eslint/explicit-function-return-type": ["error"]
     }
   }

@@ -16,6 +16,7 @@
     "bcrypt": "^5.1.1",
     "fastify": "^4.28.1",
     "pino": "^9.2.0",
+    "redis": "^4.6.15",
     "ws": "^8.18.0"
   },
   "devDependencies": {
