@@ -2,6 +2,7 @@ import { existsSync } from "fs";
 import staticServer from "@fastify/static";
 import createServer from "fastify";
 import type { FastifyInstance, FastifyRequest } from "fastify";
+import createSession from "../interactions/sessions/create_session";
 import createUser from "../interactions/users/create_user";
 import { ApplicationServer } from "./application_server";
 
@@ -74,8 +75,9 @@ export class LobbyServer extends ApplicationServer {
     this.server.post("/api/v1/user", async (request, reply) => {
       const params = this.getParams(request);
       const result = await createUser({
-        name:     params.name || "",
-        password: params.password || ""
+        name:          params.name || "",
+        loginId:       params.loginId || "",
+        loginPassword: params.loginPassword || ""
       });
 
       if (result.error) {
@@ -83,6 +85,21 @@ export class LobbyServer extends ApplicationServer {
       } else {
         LOGGER.info(`CreateUser id:${result.value.id} ip:${request.socket.remoteAddress} port:${request.socket.remotePort}`);
         reply.status(200).send({ ok: true });
+      }
+    });
+
+    this.server.post("/api/v1/session", async (request, reply) => {
+      const params = this.getParams(request);
+      const result = await createSession({
+        loginId:       params.loginId || "",
+        loginPassword: params.loginPassword || ""
+      });
+
+      if (result.error) {
+        reply.status(400).send({ ok: false, error: result.error });
+      } else {
+        LOGGER.info(`CreateSession id:${result.value.user.id} ip:${request.socket.remoteAddress} port:${request.socket.remotePort}`);
+        reply.status(200).send({ ok: true, token: result.value.token });
       }
     });
   }
