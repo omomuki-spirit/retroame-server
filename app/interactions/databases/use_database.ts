@@ -8,6 +8,6 @@ const CLIENT = new PrismaClient();
  * @param callback
  * @returns Return value of callback
  */
-export default function useDatabase<RT>(callback: (client: PrismaClient) => RT): RT {
+export default function useDatabase<T>(callback: (client: PrismaClient) => T): T {
   return callback(CLIENT);
 }

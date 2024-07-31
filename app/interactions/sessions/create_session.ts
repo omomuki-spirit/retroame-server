@@ -1,7 +1,7 @@
 import type { TOperationResult } from "../../types/interactions/operation_result";
 import type { IUser } from "../../types/models/user";
 import useDatabase from "../databases/use_database";
-import comparePassword from "../passwords/compare_password";
+import comparePassword from "../systems/compare_password";
 
 interface ISession {
   user: IUser,

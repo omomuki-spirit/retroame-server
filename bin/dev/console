@@ -1,0 +1,5 @@
+#!/bin/bash
+# Start TypeScript Console(REPL) in container
+set -e;
+
+$(dirname $0)/run yarn run ts-node;
