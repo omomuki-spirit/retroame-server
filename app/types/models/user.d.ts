@@ -1,3 +1,3 @@
-import type { User } from "/app/.output/prisma/client";
+import type { User } from '/app/.output/prisma/client';
 
-export interface IUser extends User {}
+export type TUser = User;

@@ -1,5 +1,5 @@
-import { WebSocketServer } from "ws";
-import { ApplicationServer } from "./application_server";
+import { WebSocketServer } from 'ws';
+import { ApplicationServer } from './application_server';
 
 /**
  * LobbyServer (WebSocket Server)
@@ -23,16 +23,16 @@ export class WorldServer extends ApplicationServer {
   start(): void {
     LOGGER.info(`Listen ws://${this.host}:${this.port}`);
 
-    this.server.on("connection", (ws, req) => {
+    this.server.on('connection', (ws, req) => {
       console.log(`${req.socket.remoteAddress}, ${req.socket.remotePort}`);
 
-      ws.on("close", () => { console.log("close");});
-      ws.on("error", () => { console.log("error");});
-      ws.on("message", () => { console.log("message");});
-      ws.on("ping", () => { console.log("ping");});
-      ws.on("pong", () => { console.log("pong");});
-      ws.on("unexpected-response", () => { console.log("unexpected-response");});
-      ws.on("upgrade", () => { console.log("upgrade"); });
+      ws.on('close', () => { console.log('close'); });
+      ws.on('error', () => { console.log('error'); });
+      ws.on('message', () => { console.log('message'); });
+      ws.on('ping', () => { console.log('ping'); });
+      ws.on('pong', () => { console.log('pong'); });
+      ws.on('unexpected-response', () => { console.log('unexpected-response'); });
+      ws.on('upgrade', () => { console.log('upgrade'); });
     });
   }
 }

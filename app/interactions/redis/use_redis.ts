@@ -1,4 +1,4 @@
-import { createClient } from "redis";
+import { createClient } from 'redis';
 
 const CLIENT = createClient({
   url: process.env.RETROAME_REDIS_URL,
@@ -6,7 +6,7 @@ const CLIENT = createClient({
 
 /**
  * Use redis.
- * @param callback
+ * @param callback Execute function
  * @returns Return value of callback
  */
 export default async function useRedis<T>(callback: (client: typeof CLIENT) => T): Promise<T> {

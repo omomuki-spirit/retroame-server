@@ -1,2 +1,2 @@
-import "./build_app";
-import "./build_assets";
+import './build_app';
+import './build_assets';
